@@ -1,54 +1,406 @@
-<!DOCTYPE  </htmlanEOF
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshBite | Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-c/span>
-c/span>
-E  </htmlanEOF
+  <div class="scroll-progress" id="scroll-progress"></div>
 
-t-count">0</span>
+  <button class="theme-toggle" id="theme-toggle"></button>
+
+  <button class="scroll-to-top" id="scroll-to-top">↑</button>
+
+  <div class="app-container">
+    <div class="promo-banner">20% OFF Today | Free Delivery</div>
+    <header class="app-header">
+      <a href="home.html" class="brand">FreshBite</a>
+      <nav class="top-nav">
+        <a href="home.html">Home</a>
+        <a href="Menu.html">Menu</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="cart-indicator">
+        <span class="cart-count">0</span>
+        <a href="cart.html">Cart</a>
       </div>
     </header>
 
     <main class="app-main">
-      <section class="hero-card">
-        <div class="hero-copy">
-          <span class="hero-badge">App-style ordering</span>
-          <h1>Delicious meals, delivered fast.</h1>
-          <p>Browse favorites, add to your tray, and checkout with a seamless mobile-first app experience.</p>
-          <div class="hero-actions">
-            <a class="btn-primary" href="Menu.html">Order Now</a>
-            <a class="btn-secondary" href="contact.html">Need help?</a>
+      <!-- Hero Section -->
+       <section class="hero">
+  <video autoplay muted loop playsinline class="hero-video">
+    <source src="/video/food.mp4/video:food.mp4" type="video/mp4">
+  </video>
+
+  <div class="overlay"></div>
+
+  <div class="hero-content">
+    <h1 class="fade-up">Delicious Meals Delivered Fast</h1>
+    <p class="fade-up delay-1">Fresh, tasty, and made just for you</p>
+
+    <div class="hero-buttons fade-up delay-2">
+      <a href="menu.html" class="btn">Order Now</a>
+      <a href="menu.html" class="btn secondary">View Menu</a>
+    </div>
+  </div>
+</section>
+
+      <!-- Landing Page Write-Up -->
+      <section class="section landing-writeup">
+        <div class="section-header">
+          <h2>Fresh food, fast service, and zero hassle.</h2>
+          <p class="subtle">Whether you're craving a hearty meal, a quick snack, or a refreshing drink, FreshBite brings restaurant-quality dishes straight to your door.</p>
+          <p class="subtle">Our commitment to quality means every ingredient is carefully selected, every dish is prepared with passion, and every delivery is made with care. Join thousands of satisfied customers who have made FreshBite their go-to choice for delicious, convenient dining.</p>
+        </div>
+        <div class="writeup-grid">
+          <div class="writeup-card fade-in">
+            <h3>Handpicked quality</h3>
+            <p>We select premium ingredients for every dish, so you can enjoy bold flavor with every bite.</p>
+          </div>
+          <div class="writeup-card fade-in">
+            <h3>Fast delivery</h3>
+            <p>Order in seconds and get your meal delivered hot and fresh, without the wait.</p>
+          </div>
+          <div class="writeup-card fade-in">
+            <h3>Simple ordering</h3>
+            <p>Use our app-style interface to browse, customize, and order in just a few taps.</p>
+          </div>
+          <div class="writeup-card fade-in">
+            <h3>Customer satisfaction</h3>
+            <p>We're dedicated to making every meal memorable with exceptional service and support.</p>
           </div>
         </div>
-        <div class="hero-media">
-          <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80" alt="Fresh food hero image">
-        </div>
       </section>
 
-      <section class="section feature-strip">
-        <div class="feature-chip">Fast app navigation</div>
-        <div class="feature-chip">Live cart preview</div>
-        <div class="feature-chip">Smooth mobile transitions</div>
-      </section>
-
+      <!-- Featured Meals -->
       <section class="section">
         <div class="section-header">
-          <h2>Featured meals</h2>
-          <p class="subtle">Tasty dishes ready to add to your basket.</p>
+          <h2>Featured Meals</h2>
+          <p class="subtle">Discover our most popular dishes, crafted with care and bursting with flavor</p>
         </div>
         <div class="card-grid">
-          <article class="card">
-            <div class="card-image"><img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=900&q=80" alt="Beef burger"></div>
+          <div class="card slide-up">
+            <div class="card-image">
+              <img src="/images/IMG_0896.JPG" alt="Crispy Chicken Combo">
+            </div>
             <div class="card-body">
-              <h3 class="card-title">Beef Burger Combo</h3>
-              <p class="card-text">Juicy patty, melted cheese, crispy fries, and drink.</p>
+              <h3 class="card-title">Crispy Chicken Combo</h3>
+              <p class="card-text">Golden crispy chicken with fresh bun, seasoned fries, and your choice of drink.</p>
               <div class="card-meta">
                 <span class="price">$12.50</span>
-                <a class="btn-secondary" href="Menu.html">Order</a>
+                <button class="btn-primary" onclick="orderItem('meal-1')">Order Now</button>
               </div>
             </div>
-          </article>
-          <article class="card">
-            <div class="card-image"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80" alt="Spicy rice dish"></div>
+          </div>
+          <div class="card slide-up">
+            <div class="card-image">
+              <img src="/images/IMG_0863.JPG" alt="Spicy Rice Bowl">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Spicy Rice Bowl</h3>
+              <p class="card-text">Seasoned rice topped with tender chicken, fresh vegetables, and our signature spicy sauce.</p>
+              <div class="card-meta">
+                <span class="price">$9.90</span>
+                <button class="btn-primary" onclick="orderItem('meal-3')">Order Now</button>
+              </div>
+            </div>
+          </div>
+          <div class="card slide-up">
+            <div class="card-image">
+              <img src="/images/IMG_0863.JPG" alt="Loaded Nachos">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Loaded Nachos</h3>
+              <p class="card-text">Crispy nachos piled high with melted cheese, fresh salsa, jalapeños, and sour cream.</p>
+              <div class="card-meta">
+                <span class="price">$7.90</span>
+                <button class="btn-primary" onclick="orderItem('meal-7')">Order Now</button>
+              </div>
+            </div>
+          </div>
+          <div class="card slide-up">
+            <div class="card-image">
+              <img src="/images/IMG_0859.JPG" alt="Fish Tacos">
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Fish Tacos</h3>
+              <p class="card-text">Crispy fish fillets in soft tortillas with cabbage slaw and zesty lime crema.</p>
+              <div class="card-meta">
+                <span class="price">$10.00</span>
+                <button class="btn-primary" onclick="orderItem('meal-8')">Order Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Food Carousel -->
+      <section class="section">
+        <div class="section-header">
+          <h2>Popular Dishes</h2>
+          <p class="subtle">Swipe through our most loved meals</p>
+        </div>
+        <div class="food-carousel">
+          <div class="carousel-item">
+            <div class="card hover-lift">
+              <div class="card-image">
+                <img src="/images/IMG_0892.JPG" alt="Crispy Chicken Combo">
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">Crispy Chicken Combo</h3>
+                <p class="card-text">Golden crispy chicken with fresh bun, seasoned fries, and your choice of drink.</p>
+                <div class="card-meta">
+                  <span class="price">$12.50</span>
+                  <button class="btn-primary btn-scale" onclick="orderItem('meal-1')">Order Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card hover-lift">
+              <div class="card-image">
+                <img src="/images/IMG_0883.JPG" alt="Spicy Rice Bowl">
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">Spicy Rice Bowl</h3>
+                <p class="card-text">Seasoned rice topped with tender chicken, fresh vegetables, and our signature spicy sauce.</p>
+                <div class="card-meta">
+                  <span class="price">$9.90</span>
+                  <button class="btn-primary btn-scale" onclick="orderItem('meal-3')">Order Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card hover-lift">
+              <div class="card-image">
+                <img src="/images/IMG_0896.JPG" alt="Loaded Nachos">
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">Loaded Nachos</h3>
+                <p class="card-text">Crispy nachos piled high with melted cheese, fresh salsa, jalapeños, and sour cream.</p>
+                <div class="card-meta">
+                  <span class="price">$7.90</span>
+                  <button class="btn-primary btn-scale" onclick="orderItem('meal-7')">Order Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Food Categories -->
+      <section class="section">
+        <div class="section-header">
+          <h2>Explore Categories</h2>
+          <p class="subtle">Find exactly what you're craving from our diverse menu</p>
+        </div>
+        <div class="categories-grid">
+          <a href="Menu.html?category=rice" class="category-card fade-in">
+            <div class="category-icon">🍚</div>
+            <h3>Rice Dishes</h3>
+            <p>Flavorful rice bowls and plates</p>
+          </a>
+          <a href="Menu.html?category=grills" class="category-card fade-in">
+            <div class="category-icon">🍔</div>
+            <h3>Grills</h3>
+            <p>Juicy burgers and grilled favorites</p>
+          </a>
+          <a href="Menu.html?category=snacks" class="category-card fade-in">
+            <div class="category-icon">🍟</div>
+            <h3>Snacks</h3>
+            <p>Crispy bites and shareable plates</p>
+          </a>
+          <a href="Menu.html?category=drinks" class="category-card fade-in">
+            <div class="category-icon">🥤</div>
+            <h3>Drinks</h3>
+            <p>Refreshing beverages and smoothies</p>
+          </a>
+        </div>
+      </section>
+
+      <!-- Why Choose Us -->
+      <section class="section">
+        <div class="section-header">
+          <h2>Why Choose FreshBite?</h2>
+          <p class="subtle">We're committed to delivering an exceptional food experience</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card fade-in">
+            <div class="feature-icon">⚡</div>
+            <h3>Lightning Fast</h3>
+            <p>Quick preparation and delivery to get your food to you as soon as possible.</p>
+          </div>
+          <div class="feature-card fade-in">
+            <div class="feature-icon">🥬</div>
+            <h3>Fresh Ingredients</h3>
+            <p>We source the finest, freshest ingredients daily for maximum flavor and nutrition.</p>
+          </div>
+          <div class="feature-card fade-in">
+            <div class="feature-icon">💰</div>
+            <h3>Affordable</h3>
+            <p>Quality meals at prices that won't break the bank. Great value for everyone.</p>
+          </div>
+          <div class="feature-card fade-in">
+            <div class="feature-icon">⭐</div>
+            <h3>Quality Service</h3>
+            <p>Exceptional customer service with a focus on your satisfaction and experience.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trust Section -->
+      <section class="section trust-section">
+        <div class="section-header">
+          <h2>Trusted by Thousands</h2>
+          <p class="subtle">Join our growing community of satisfied food lovers</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number" data-target="1000">0</div>
+            <div class="stat-label">Happy Customers</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="5000">0</div>
+            <div class="stat-label">Meals Delivered</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="5">0</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" data-target="98">0</div>
+            <div class="stat-label">Satisfaction Rate</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Food Gallery -->
+      <section class="section">
+        <div class="section-header">
+          <h2>Food Gallery</h2>
+          <p class="subtle">A glimpse of the delicious dishes we prepare every day</p>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="/images/IMG_0866.JPG" alt="Food item">
+          </div>
+          <div class="gallery-item">
+            <img src="/images/IMG_0856.JPG" alt="Food item">
+          </div>
+          <div class="gallery-item">
+            <img src="/images/IMG_0861.JPG" alt="Food item">
+          </div>
+          <div class="gallery-item">
+            <img src="/images/IMG_0868.JPG" alt="Food item">
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1497534446932-c925b458314e?auto=format&fit=crop&w=400&q=80" alt="Food item">
+          </div>
+          <div class="gallery-item">
+            <img src="/images/IMG_0865.JPG" alt="Food item">
+          </div>
+        </div>
+        <div class="gallery-cta">
+          <a href="Menu.html" class="btn-primary">View Full Menu</a>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section class="section">
+        <div class="section-header">
+          <h2>What Our Customers Say</h2>
+          <p class="subtle">Real reviews from satisfied customers</p>
+        </div>
+        <div class="testimonial-slider">
+          <div class="testimonial-slide active">
+            <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80" alt="Sarah Johnson">
+            <p>"The food is absolutely delicious! Fast delivery and great service."</p>
+            <cite>- Sarah Johnson</cite>
+          </div>
+          <div class="testimonial-slide">
+            <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80" alt="Mike Chen">
+            <p>"Best food ordering app I've used. The interface is so smooth."</p>
+            <cite>- Mike Chen</cite>
+          </div>
+          <div class="testimonial-slide">
+            <img class="testimonial-avatar" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80" alt="Emily Davis">
+            <p>"Fresh ingredients and amazing taste. Highly recommend!"</p>
+            <cite>- Emily Davis</cite>
+          </div>
+        </div>
+        <div class="testimonial-dots">
+          <span class="dot active" onclick="showSlide(0)"></span>
+          <span class="dot" onclick="showSlide(1)"></span>
+          <span class="dot" onclick="showSlide(2)"></span>
+        </div>
+      </section>
+
+      <!-- Quick Order CTA -->
+      <section class="section order-cta">
+        <div class="cta-content">
+          <h2>Ready to Order Your Favorite Meal?</h2>
+          <p>Browse our menu, add items to your cart, and enjoy delicious food delivered to your door.</p>
+          <div class="cta-buttons">
+            <a href="Menu.html" class="btn-primary">Start Ordering</a>
+            <a href="cart.html" class="btn-secondary">View Cart</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Map Section -->
+      <section class="section">
+        <div class="section-header">
+          <h2>Find Us</h2>
+          <p class="subtle">Visit our location or order for delivery</p>
+        </div>
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.9537353153168!3d-37.816279742021665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577d1f9c7c9b1e!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1611812345678!5m2!1sen!2sau" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="home.html">
+        <span>🏠</span>
+        Home
+      </a>
+      <a href="Menu.html">
+        <span>📋</span>
+        Menu
+      </a>
+      <a href="Order.html">
+        <span>🍽️</span>
+        Order
+      </a>
+      <a href="cart.html">
+        <span>🛒</span>
+        Cart
+      </a>
+      <a href="contact.html">
+        <span>📞</span>
+        Contact
+      </a>
+    </nav>
+  </div>
+
+  <!-- Floating Cart Icon -->
+  <div class="floating-cart" onclick="window.location.href='cart.html'">
+    <span class="floating-cart-icon">🛒</span>
+    <span class="floating-cart-count">0</span>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+            <div class="card-image"><img src="/images/IMG_0880.JPG" alt="Spicy rice dish"></div>
             <div class="card-body">
               <h3 class="card-title">Spicy Rice Bowl</h3>
               <p class="card-text">A savory rice bowl with grilled chicken, salsa, and greens.</p>
@@ -59,7 +411,7 @@ t-count">0</span>
             </div>
           </article>
           <article class="card">
-            <div class="card-image"><img src="https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?auto=format&fit=crop&w=900&q=80" alt="Refreshing drink"></div>
+            <div class="card-image"><img src="/images/IMG_0899.JPG" alt="Refreshing drink"></div>
             <div class="card-body">
               <h3 class="card-title">Mango Smoothie</h3>
               <p class="card-text">Creamy mango refreshment made for fast cravings.</p>
@@ -106,6 +458,14 @@ t-count">0</span>
       </a>
     </nav>
   </div>
+
+  <!-- Floating Cart Icon -->
+  <div class="floating-cart" onclick="window.location.href='cart.html'">
+    <span class="floating-cart-icon">🛒</span>
+    <span class="floating-cart-count">0</span>
+  </div>
+
   <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
 </body>
 </html>
