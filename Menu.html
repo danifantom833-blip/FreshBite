@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshBite | Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <a href="home.html" class="brand">FreshBite</a>
+      <nav class="top-nav">
+        <a href="home.html">Home</a>
+        <a href="Menu.html">Menu</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="cart-indicator">
+        <span class="cart-count">0</span>
+        <a href="cart.html">Cart</a>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <!-- Hero Section -->
+      <section class="menu-hero">
+        <video autoplay muted loop playsinline class="hero-video">
+    <source src="/video/food.mp4/video:food.mp.4.MP4" type="video/mp4">
+  </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h1>Our Menu</h1>
+          <p class="hero-subtitle">Discover delicious meals crafted with fresh ingredients and served with love.</p>
+        </div>
+      </section>
+
+      <!-- Category Navigation -->
+      <div class="category-nav">
+        <div class="search-bar-wrapper">
+          <input id="menu-search" class="search-bar" type="search" placeholder="Search meals..." aria-label="Search meals">
+        </div>
+        <div class="category-scroll">
+          <button class="category-pill active" data-category="all">All</button>
+          <button class="category-pill" data-category="rice">Rice</button>
+          <button class="category-pill" data-category="grills">Grills</button>
+          <button class="category-pill" data-category="snacks">Snacks</button>
+          <button class="category-pill" data-category="drinks">Drinks</button>
+        </div>
+      </div>
+
+      <!-- Menu Grid -->
+      <section class="section">
+        <div id="menu-grid" class="card-grid"></div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="section menu-cta">
+        <div class="cta-content">
+          <h2>Ready to Order?</h2>
+          <p>Check out your cart or get in touch with us for any questions.</p>
+          <div class="cta-buttons">
+            <a href="cart.html" class="btn-primary">Proceed to Order</a>
+            <a href="contact.html" class="btn-secondary">Contact Us</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="home.html">
+        <span>🏠</span>
+        Home
+      </a>
+      <a href="Menu.html">
+        <span>📋</span>
+        Menu
+      </a>
+      <a href="Order.html">
+        <span>🛵</span>
+        Order
+      </a>
+      <a href="cart.html">
+        <span>🛒</span>
+        Cart
+      </a>
+      <a href="contact.html">
+        <span>📞</span>
+        Contact
+      </a>
+    </nav>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+
+  <!-- Floating Cart Icon -->
+  <div class="floating-cart" onclick="window.location.href='cart.html'">
+    <span class="floating-cart-icon">🛒</span>
+    <span class="floating-cart-count">0</span>
+  </div>
+</body>
+</html>
