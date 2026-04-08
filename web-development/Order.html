@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreshBite | Order Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .dashboard-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #e55a2b 100%);
+      color: white;
+      padding: 3rem 2rem;
+      border-radius: 24px;
+      margin-bottom: 3rem;
+      display: grid;
+      gap: 2rem;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin: 0 0 1rem 0;
+      line-height: 1.1;
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 500px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .metric-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .metric-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-label {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+      margin: 3rem 0;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .action-btn {
+      padding: 1.5rem;
+      border: 2px solid var(--primary);
+      background: white;
+      color: var(--primary);
+      border-radius: 16px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+    }
+
+    .action-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .action-btn span {
+      font-size: 2rem;
+    }
+
+    .action-btn.primary {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .action-btn.primary:hover {
+      background: var(--primary-hover);
+      border-color: var(--primary-hover);
+    }
+
+    .order-layout {
+      display: grid;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (min-width: 1024px) {
+      .order-layout {
+        grid-template-columns: 1.5fr 1fr;
+      }
+    }
+
+    .order-panel, .summary-panel {
+      background: white;
+      border-radius: 24px;
+      padding: 2.2rem;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
+    }
+
+    .panel-header h2 {
+      font-size: 1.4rem;
+      margin: 0 0 0.4rem 0;
+      color: var(--text-dark);
+    }
+
+    .panel-header p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .order-form {
+      display: grid;
+      gap: 1.3rem;
+      margin-top: 1.5rem;
+    }
+
+    .form-group {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+    }
+
+    .form-group input, .form-group textarea, .form-group select {
+      padding: 1rem 1.1rem;
+      border: 1.5px solid rgba(0, 0, 0, 0.1);
+      border-radius: 18px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.12);
+      outline: none;
+    }
+
+    .payment-section {
+      margin-top: 2rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .payment-section h3 {
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+      font-size: 1rem;
+    }
+
+    .payment-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.2rem;
+      border-radius: 16px;
+      border: 1.5px solid rgba(0, 0, 0, 0.08);
+      background: #fafaf8;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 1rem;
+    }
+
+    .payment-option:hover {
+      border-color: var(--primary);
+      background: rgba(255, 107, 53, 0.05);
+    }
+
+    .payment-option input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      cursor: pointer;
+    }
+
+    .payment-option span {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .payment-option small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 18px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1.5rem;
+    }
+
+    .submit-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(255, 107, 53, 0.3);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .order-totals {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255, 107, 53, 0.08) 0%, rgba(255, 107, 53, 0.04) 100%);
+      border: 1px solid rgba(255, 107, 53, 0.12);
+    }
+
+    .total-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .total-line:last-child {
+      margin-bottom: 0;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--text-dark);
+    }
+
+    .fade-in {
+      opacity: 0;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .food-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .food-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
+    }
+
+    .food-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: linear-gradient(135deg, #f5f1ed 0%, #ede8e3 100%);
+    }
+
+    .food-info {
+      padding: 1.3rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .food-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .food-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+      flex-grow: 1;
+      line-height: 1.4;
+    }
+
+    .food-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .food-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .food-add-btn {
+      padding: 0.7rem 1.2rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .food-add-btn:hover {
+      background: var(--primary-hover);
+      transform: scale(1.05);
+    }
+
+    .food-add-btn:active {
+      transform: scale(0.95);
+    }
+
+    .cart-items {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1rem;
+      border-radius: 14px;
+      background: #f9f7f3;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .cart-item-image {
+      width: 70px;
+      height: 70px;
+      border-radius: 12px;
+      object-fit: cover;
+      background: #fff;
+    }
+
+    .cart-item-info {
+      flex-grow: 1;
+    }
+
+    .cart-item-name {
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.3rem;
+      font-size: 0.95rem;
+    }
+
+    .cart-item-price {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .cart-item-actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .qty-badge {
+      background: var(--primary);
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .remove-item {
+      background: rgba(255, 107, 53, 0.1);
+      color: var(--primary);
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .remove-item:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .empty-cart-msg {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+    }
+
+    .empty-cart-msg p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .section-title:first-of-type {
+      margin-top: 0;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-hero {
+        padding: 2rem 1.5rem;
+      }
+
+      .order-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .order-panel, .summary-panel {
+        padding: 1.5rem;
+      }
+
+      .food-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1rem;
+      }
+
+      .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .metric-card {
+        padding: 1.5rem;
+      }
+
+      .metric-number {
+        font-size: 2rem;
+      }
+    }
+
+    .page-hero {
+      position: relative;
+      min-height: 45vh;
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 3rem 2rem;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%), url('https://images.unsplash.com/photo-1555939594-58d7cb561ffc?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      color: white;
+      margin-bottom: 3rem;
+    }
+    .page-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      margin-bottom: 0.5rem;
+      line-height: 1.1;
+    }
+    .page-hero p {
+      font-size: clamp(1rem, 2vw, 1.1rem);
+      max-width: 650px;
+      color: rgba(255, 255, 255, 0.95);
+    }
+    .order-layout {
+      display: grid;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    @media (min-width: 1024px) {
+      .order-layout {
+        grid-template-columns: 1.5fr 1fr;
+      }
+    }
+    .order-panel, .summary-panel {
+      background: white;
+      border-radius: 24px;
+      padding: 2.2rem;
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
+    }
+    .panel-header h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.4rem;
+      color: var(--text-dark);
+    }
+    .panel-header p {
+      color: var(--muted);
+      margin: 0;
+    }
+    .order-form {
+      display: grid;
+      gap: 1.3rem;
+      margin-top: 1.5rem;
+    }
+    .form-group {
+      display: grid;
+      gap: 0.6rem;
+    }
+    .form-group label {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      padding: 1rem 1.1rem;
+      border: 1.5px solid rgba(0, 0, 0, 0.1);
+      border-radius: 18px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.12);
+      outline: none;
+    }
+    .quantity-control {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+    .quantity-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(0, 0, 0, 0.1);
+      background: white;
+      color: var(--text-dark);
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .quantity-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .quantity-btn:active {
+      transform: scale(0.95);
+    }
+    .quantity-control input {
+      width: 60px;
+      text-align: center;
+      padding: 0.8rem;
+    }
+    .payment-section {
+      margin-top: 2rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    .payment-section h3 {
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+    .payment-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.2rem;
+      border-radius: 16px;
+      border: 1.5px solid rgba(0, 0, 0, 0.08);
+      background: #fafaf8;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 1rem;
+    }
+    .payment-option:hover {
+      border-color: var(--primary);
+      background: rgba(255, 107, 53, 0.05);
+    }
+    .payment-option input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      cursor: pointer;
+    }
+    .payment-option span {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+    .payment-option small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 18px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1.5rem;
+    }
+    .submit-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(255, 107, 53, 0.3);
+    }
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border-radius: 14px;
+      background: #f9f7f3;
+      margin-bottom: 0.8rem;
+    }
+    .summary-item span {
+      color: var(--muted);
+    }
+    .summary-item strong {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+    .order-totals {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255, 107, 53, 0.08) 0%, rgba(255, 107, 53, 0.04) 100%);
+      border: 1px solid rgba(255, 107, 53, 0.12);
+    }
+    .total-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+      color: var(--muted);
+    }
+    .total-line:last-child {
+      margin-bottom: 0;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--text-dark);
+    }
+    .fade-in {
+      opacity: 0;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .order-panel { animation-delay: 0.1s; }
+    .summary-panel { animation-delay: 0.2s; }
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .food-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .food-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
+    }
+
+    .food-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background: linear-gradient(135deg, #f5f1ed 0%, #ede8e3 100%);
+    }
+
+    .food-info {
+      padding: 1.3rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .food-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .food-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+      flex-grow: 1;
+      line-height: 1.4;
+    }
+
+    .food-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .food-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .food-add-btn {
+      padding: 0.7rem 1.2rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .food-add-btn:hover {
+      background: var(--primary-hover);
+      transform: scale(1.05);
+    }
+
+    .food-add-btn:active {
+      transform: scale(0.95);
+    }
+
+    .cart-items {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1rem;
+      border-radius: 14px;
+      background: #f9f7f3;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .cart-item-image {
+      width: 70px;
+      height: 70px;
+      border-radius: 12px;
+      object-fit: cover;
+      background: #fff;
+    }
+
+    .cart-item-info {
+      flex-grow: 1;
+    }
+
+    .cart-item-name {
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .cart-item-price {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .cart-item-actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .qty-badge {
+      background: var(--primary);
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .remove-item {
+      background: rgba(255, 107, 53, 0.1);
+      color: var(--primary);
+      border: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .remove-item:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .empty-cart-msg {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+    }
+
+    .empty-cart-msg p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .page-hero {
+        min-height: 40vh;
+        padding: 2rem 1.5rem;
+      }
+      .order-layout {
+        grid-template-columns: 1fr;
+      }
+      .quantity-control {
+        flex-wrap: wrap;
+      }
+      .order-panel, .summary-panel {
+        padding: 1.5rem;
+      }
+      .food-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <a href="index.html" class="brand">FreshBite</a>
+      <nav class="top-nav">
+        <a href="index.html">Home</a>
+        <a href="Menu.html">Menu</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="cart-indicator">
+        <span class="cart-count">0</span>
+        <a href="cart.html">Cart</a>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section class="dashboard-hero fade-in">
+        <div class="hero-content">
+          <h1>Order Your Meal</h1>
+          <p>Browse our delicious menu, build your perfect order, and get it delivered fresh to your door.</p>
+        </div>
+      </section>
+
+      <section class="metrics-grid fade-in" style="animation-delay: 0.1s;">
+        <div class="metric-card">
+          <div class="metric-number" id="total-orders">0</div>
+          <div class="metric-label">Orders Placed</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number" id="total-spent">$0</div>
+          <div class="metric-label">Total Spent</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number" id="delivery-time">15min</div>
+          <div class="metric-label">Avg Delivery</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-number" id="items-ordered">0</div>
+          <div class="metric-label">Items Ordered</div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <section class="quick-actions fade-in" style="animation-delay: 0.2s;">
+        <a href="Menu.html" class="action-btn primary">
+          <span>🍽️</span>
+          View Full Menu
+        </a>
+        <a href="#food-grid" class="action-btn">
+          <span>⏬</span>
+          Quick Order Below
+        </a>
+        <a href="contact.html" class="action-btn">
+          <span>💬</span>
+          Contact Support
+        </a>
+      </section>
+
+      <section class="section fade-in" style="animation-delay: 0.3s;">
+        <h2 class="section-title">Choose Your Meal</h2>
+        <div class="food-grid" id="food-grid"></div>
+      </section>
+
+      <section class="section order-layout fade-in" style="animation-delay: 0.4s;">
+        <div class="order-panel fade-in">
+          <div class="panel-header">
+            <h2>Your Order</h2>
+            <p class="subtle">Review selected items and complete your delivery information.</p>
+          </div>
+
+          <div id="cart-display" class="cart-items"></div>
+
+          <form id="order-form" class="order-form" style="margin-top: 2rem;">
+            <div class="form-group">
+              <label for="order-name">Full Name</label>
+              <input id="order-name" name="name" type="text" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="order-phone">Phone Number</label>
+              <input id="order-phone" name="phone" type="tel" placeholder="+1 234 567 890" required>
+            </div>
+
+            <div class="form-group">
+              <label for="order-address">Delivery Address</label>
+              <input id="order-address" name="address" type="text" placeholder="123 Fresh Street, Food City" required>
+            </div>
+
+            <div class="form-group">
+              <label for="instructions">Special Instructions (Optional)</label>
+              <textarea id="instructions" name="instructions" placeholder="Add any special requests..." rows="3"></textarea>
+            </div>
+
+            <div class="payment-section">
+              <h3>Checkout Method</h3>
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="whatsapp" checked>
+                <div>
+                  <span>WhatsApp Checkout</span>
+                  <small>Send your order instantly via WhatsApp</small>
+                </div>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="paystack">
+                <div>
+                  <span>Card Payment (Paystack)</span>
+                  <small>Secure payment integration coming soon</small>
+                </div>
+              </label>
+            </div>
+
+            <button type="submit" class="submit-btn">Place Order</button>
+          </form>
+        </div>
+
+        <aside class="summary-panel fade-in">
+          <div class="panel-header">
+            <h2>Order Summary</h2>
+            <p class="subtle">Your meal selections and total cost.</p>
+          </div>
+
+          <div id="summary-items" class="cart-items"></div>
+
+          <div class="order-totals">
+            <div class="total-line">
+              <span>Subtotal</span>
+              <span id="subtotal">$0.00</span>
+            </div>
+            <div class="total-line">
+              <span>Delivery Fee</span>
+              <span>$2.50</span>
+            </div>
+            <div class="total-line">
+              <span>Total</span>
+              <span id="total">$2.50</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="index.html"><span>🏠</span>Home</a>
+      <a href="Menu.html"><span>📋</span>Menu</a>
+      <a href="Order.html" class="active"><span>🍽️</span>Order</a>
+      <a href="cart.html"><span>🛒</span>Cart</a>
+      <a href="contact.html"><span>📞</span>Contact</a>
+    </nav>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    const menuItems = [
+      { id: 'meal-1', name: 'Crispy Chicken Combo', desc: 'Crispy chicken, fries & drink', price: 12.50, image: 'images/IMG_0880.JPG' },
+      { id: 'meal-2', name: 'Beef Burger', desc: 'Classic beef with cheddar & greens', price: 11.00, image: 'images/IMG_0899.JPG' },
+      { id: 'meal-3', name: 'Spicy Rice Bowl', desc: 'Seasoned rice with chicken & veggies', price: 9.90, image: 'images/IMG_0890.JPG' },
+      { id: 'meal-4', name: 'Veggie Wrap', desc: 'Fresh wrap with hummus & veggies', price: 8.40, image: 'images/IMG_0863.JPG' },
+      { id: 'meal-5', name: 'French Fries', desc: 'Golden fries with seasoning', price: 4.50, image: 'images/IMG_0865.JPG' },
+      { id: 'meal-6', name: 'Mango Smoothie', desc: 'Refreshing chilled smoothie', price: 5.20, image: 'https://images.unsplash.com/photo-1497534446932-c925b458314e?auto=format&fit=crop&w=500&q=60' },
+      { id: 'meal-7', name: 'Loaded Nachos', desc: 'Crispy nachos with cheese & salsa', price: 7.90, image: 'images/IMG_0868.JPG' },
+      { id: 'meal-8', name: 'Fish Tacos', desc: 'Crispy fish with slaw & sauce', price: 10.00, image: 'images/IMG_0861.JPG' }
+    ];
+
+    let cart = {};
+
+    function renderFoodGrid() {
+      const grid = document.getElementById('food-grid');
+      grid.innerHTML = menuItems.map(item => `
+        <div class="food-card">
+          <img src="${item.image}" alt="${item.name}" class="food-image">
+          <div class="food-info">
+            <div class="food-name">${item.name}</div>
+            <div class="food-desc">${item.desc}</div>
+            <div class="food-footer">
+              <div class="food-price">$${item.price.toFixed(2)}</div>
+              <button type="button" class="food-add-btn" onclick="addToCart('${item.id}')">Add</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addToCart(itemId) {
+      const item = menuItems.find(i => i.id === itemId);
+      if (!item) return;
+
+      if (cart[itemId]) {
+        cart[itemId].qty++;
+      } else {
+        cart[itemId] = { ...item, qty: 1 };
+      }
+
+      updateDisplay();
+      showToast(`${item.name} added to order!`);
+    }
+
+    function removeFromCart(itemId) {
+      delete cart[itemId];
+      updateDisplay();
+      showToast('Item removed');
+    }
+
+    function updateDisplay() {
+      const cartDisplay = document.getElementById('cart-display');
+      const summaryItems = document.getElementById('summary-items');
+      const items = Object.values(cart);
+
+      let html = '';
+      if (items.length === 0) {
+        html = '<div class="empty-cart-msg"><p>No items selected. Choose from the menu above.</p></div>';
+        cartDisplay.innerHTML = html;
+        summaryItems.innerHTML = html;
+      } else {
+        html = items.map(item => `
+          <div class="cart-item">
+            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">$${item.price.toFixed(2)} each</div>
+            </div>
+            <div class="cart-item-actions">
+              <div class="qty-badge">${item.qty}</div>
+              <button type="button" class="remove-item" onclick="removeFromCart('${item.id}')">✕</button>
+            </div>
+          </div>
+        `).join('');
+        cartDisplay.innerHTML = html;
+        summaryItems.innerHTML = html;
+      }
+
+      updateTotals();
+    }
+
+    function updateTotals() {
+      const items = Object.values(cart);
+      const subtotal = items.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const total = subtotal + 2.50;
+
+      document.getElementById('subtotal').textContent = '$' + subtotal.toFixed(2);
+      document.getElementById('total').textContent = '$' + total.toFixed(2);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    document.getElementById('order-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const items = Object.values(cart);
+      if (items.length === 0) {
+        showToast('Please select at least one item');
+        return;
+      }
+
+      const name = document.getElementById('order-name').value.trim();
+      const phone = document.getElementById('order-phone').value.trim();
+      const address = document.getElementById('order-address').value.trim();
+      const instructions = document.getElementById('instructions').value.trim();
+
+      if (!name || !phone || !address) {
+        showToast('Please fill in all required fields');
+        return;
+      }
+
+      const subtotal = items.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const total = (subtotal + 2.50).toFixed(2);
+
+      let orderText = 'Hi FreshBite, I want to place an order:\n\nName: ' + name + '\nPhone: ' + phone + '\nAddress: ' + address + '\n\nItems:\n';
+      items.forEach(item => {
+        orderText += '• ' + item.name + ' × ' + item.qty + ' = $' + (item.price * item.qty).toFixed(2) + '\n';
+      });
+      orderText += '\nSubtotal: $' + subtotal.toFixed(2) + '\nDelivery Fee: $2.50\nTotal: $' + total;
+      if (instructions) orderText += '\n\nSpecial Instructions: ' + instructions;
+
+      const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+
+      if (paymentMethod === 'whatsapp') {
+        window.open('https://wa.me/1234567890?text=' + encodeURIComponent(orderText), '_blank');
+      } else {
+        showToast('Paystack coming soon. Use WhatsApp for now.');
+      }
+    });
+
+    renderFoodGrid();
+    updateDisplay();
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
