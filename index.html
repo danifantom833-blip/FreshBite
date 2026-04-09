@@ -10,13 +10,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <div class="scroll-progress" id="scroll-progress"></div>
-
-  <button class="theme-toggle" id="theme-toggle"></button>
-
-  <button class="scroll-to-top" id="scroll-to-top"></button>
-
   
   <div class="app-container">
 
@@ -27,11 +20,10 @@
         <a href="Menu.html">Menu</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
+        <a href="cart.html">Cart</a>
       </nav>
-      <div class="cart-indicator">
-        <span class="cart-count">0</span>
-        <a href="cart.html">🛒</a>
-      </div>
+
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     </header>
 
     <main class="app-main">
@@ -90,11 +82,11 @@
         <div class="card-grid">
           <div class="card slide-up">
             <div class="card-image">
-              <img src="images/IMG_0896.JPG" alt="Crispy Chicken Combo">
+              <img src="images/IMG_0896.JPG" alt="Yam and Fish source">
             </div>
             <div class="card-body">
-              <h3 class="card-title">Crispy Chicken Combo</h3>
-              <p class="card-text">Golden crispy chicken with fresh bun, seasoned fries, and your choice of drink.</p>
+              <h3 class="card-title">Yam ans Fish source</h3>
+              <p class="card-text">Freshly soft yam with fish source, seasoned fries, and your choice of drink.</p>
               <div class="card-meta">
                 <span class="price">$12.50</span>
                 <button class="btn-primary" onclick="orderItem('meal-1')">Order Now</button>
@@ -129,7 +121,7 @@
           </div>
           <div class="card slide-up">
             <div class="card-image">
-              <img src="/images/IMG_0859.JPG" alt="Fish Tacos">
+              <img src="images/IMG_0859.JPG" alt="Fish Tacos">
             </div>
             <div class="card-body">
               <h3 class="card-title">Fish Tacos</h3>
@@ -153,7 +145,7 @@
           <div class="carousel-item">
             <div class="card hover-lift">
               <div class="card-image">
-                <img src="/images/IMG_0892.JPG" alt="Crispy Chicken Combo">
+                <img src="images/IMG_0892.JPG" alt="Crispy Chicken Combo">
               </div>
               <div class="card-body">
                 <h3 class="card-title">Crispy Chicken Combo</h3>
@@ -168,7 +160,7 @@
           <div class="carousel-item">
             <div class="card hover-lift">
               <div class="card-image">
-                <img src="/images/IMG_0883.JPG" alt="Spicy Rice Bowl">
+                <img src="images/IMG_0883.JPG" alt="Spicy Rice Bowl">
               </div>
               <div class="card-body">
                 <h3 class="card-title">Spicy Rice Bowl</h3>
@@ -183,7 +175,7 @@
           <div class="carousel-item">
             <div class="card hover-lift">
               <div class="card-image">
-                <img src="/images/IMG_0896.JPG" alt="Loaded Nachos">
+                <img src="images/IMG_0896.JPG" alt="Loaded Nachos">
               </div>
               <div class="card-body">
                 <h3 class="card-title">Loaded Nachos</h3>
@@ -386,6 +378,10 @@
         <span>🛒</span>
         Cart
       </a>
+      <a href="about.html">
+        <span>ℹ️</span>
+        About
+      </a>
       <a href="contact.html">
         <span>📞</span>
         Contact
@@ -465,6 +461,12 @@
     <span class="floating-cart-icon">🛒</span>
     <span class="floating-cart-count">0</span>
   </div>
+
+  <script>
+document.getElementById("menu-btn").onclick = function () {
+  document.getElementById("nav-menu").classList.toggle("active");
+};
+</script>
 
   <div id="toast" class="toast"></div>
   <script src="script.js"></script>
